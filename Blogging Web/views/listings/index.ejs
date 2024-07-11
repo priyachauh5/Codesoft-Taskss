@@ -1,0 +1,135 @@
+<% layout("/layouts/boilerplate")%> 
+<!-- <h3>All Listings</h3> -->
+<!-- <form action="/listings/new" method="GET">
+    <button>Create New Listing</button>
+</form> -->
+
+<style>
+    #filters{
+        display:flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filter{
+        text-align:center;
+        margin-right:2rem;
+        margin-top:2rem;
+        opacity:0.7;
+    }
+    .filter:hover{
+        opacity:1;
+        cursor: pointer;
+    }
+    .filter p{
+        font-size: 0.8rem;
+    }
+
+    .tax-info{
+        display:none;
+    }
+    .tax-toggle{
+        border:1px solid black;
+        border-radius: 1rem;
+        height:3.25rem;
+        padding: 1rem;
+        margin-left: 2rem;
+        display: flex;
+        align-items: center;
+    }
+</style>
+<div id="filters">
+    <div class="filter">
+        <div><i class="fa-solid fa-newspaper"></i></div>
+        <p>Newsletter</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-building-ngo"></i></div>
+        <p>Build-NGO</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-circle-info"></i></div>
+        <p>Information</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-bullseye"></i></div>
+        <p>Target</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-users-viewfinder"></i></div>
+        <p>Community</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-bookmark"></i></div>
+        <p>Bookmark</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-video"></i></div>
+        <p>Vedio</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-lightbulb"></i></div>
+        <p>Idea</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-user-plus"></i></div>
+        <p>Followers</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-network-wired"></i></div>
+        <p>Network</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-comments"></i></div>
+        <p>Comments</p>
+    </div>
+
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total views</label>
+          </div>
+    </div>
+</div>
+
+
+<div class="row row-cols-lg-3 row-cols-md-2  row-cols-sm-1 mt-3">
+    <%for(let listing of allListings){%>
+    <a href="/listings/<%=listing._id%>" class="listing-link">
+    <div class="card col listing-card">
+        <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height:20rem">
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+            <p class="card-text">
+                <b><%=listing.title%></b><br>
+                <p class="card-text"><%=listing.description%></p>
+                <i class="tax-info"> &nbsp; &nbsp;Views:5,000+   </i>/Blog
+            </p>
+        </div>
+    </div>
+    </a>
+    <%}%>
+    
+</div>
+
+<script>
+    let taxSwitch=document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click",()=>{
+        let taxInfo=document.getElementsByClassName("tax-info");
+        // console.log(taxInfo);
+        for(info of taxInfo){
+            if(info.style.display!="inline"){
+                info.style.display="inline";
+            }else{
+                info.style.display="none";
+            }
+            
+        }
+    });
+</script>
+
+
+
+
+
+
+
